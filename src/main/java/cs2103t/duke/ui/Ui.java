@@ -1,9 +1,5 @@
 package cs2103t.duke.ui;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Scanner;
-
 /**
  * Represents the System I/O interface and layout of Duke chatbot.
  * This handles user input and Duke output.
@@ -11,14 +7,11 @@ import java.util.Scanner;
 public class Ui {
     /** Divides responses as part of layout. */
     private static final String DIVIDER = "    " + "-".repeat(61);
-    /** Reads user inputs from console. */
-    //private Scanner scannerIn;
 
     /**
      * Constructs a Ui.
      */
     public Ui() {
-        //this.scannerIn = new Scanner(System.in);
     }
 
     /**
@@ -36,22 +29,11 @@ public class Ui {
     }
 
     /**
-     * Prints to console the inputs in Duke layout.
+     * Returns inputs in Duke layout.
      * @param inputs lines of String that Duke is supposed to respond.
+     * @return string of inputs.
      */
     public String dukeRespond(String... inputs) {
-    /*    showLine();
-        PrintStream out;
-        try {
-            out = new PrintStream(System.out, false, "UTF-8");
-            for (String str : inputs) {
-                out.println("     " + str);
-            }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace(); //shouldnt happen?
-        }
-        showLine();
-     */
         StringBuilder sb = new StringBuilder();
         for (String s : inputs) {
             sb.append(s);
@@ -79,20 +61,4 @@ public class Ui {
         dukeRespond(msg);
     }
 
-    /**
-     * Waits for and reads next line of user input.
-     * @return user input.
-     */
-    /*public String readCommand() {
-        //start listening for user input
-        return this.scannerIn.nextLine();
-    }
-
-    /**
-     * Closes scanner before terminating Duke.
-     */
-    /*public void closeScanner() {
-        this.scannerIn.close();
-    }
-     */
 }

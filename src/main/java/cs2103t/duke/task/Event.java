@@ -27,15 +27,16 @@ public class Event extends Task {
     }
 
     private void setupDetails(String input) throws IncorrectTaskFormatException {
-        String[] tmp = input.split("\\s+/at\\s+");
-        this.description = tmp[0];
+        final int DESCR = 0, DATE_INDEX = 1, NUM_MUST_HAVE_SECTIONS = 2;
+        String[] sections = input.split("\\s+/at\\s+");
+        this.description = sections[DESCR];
         //inputs should only have <=1 '/' characters
-        if (tmp.length < 2) {
+        if (sections.length < NUM_MUST_HAVE_SECTIONS) {
             throw new IncorrectTaskFormatException("at");
         }
 
         String term = "at";
-        String datetime = tmp[1];
+        String datetime = sections[1];
 
         if (datetime.equals("")) {
             throw new IncorrectTaskFormatException("at");

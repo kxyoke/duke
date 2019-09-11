@@ -48,20 +48,21 @@ public class Storage {
 
             fr = new FileWriter(new File(filepath), true);
             BufferedWriter br = new BufferedWriter(fr);
-            //for each task, br.write("data");
-            //descr, id, iscompleted
+
             for (Task t : tasks) {
-                String details = String.format("%s | %d | %s\r\n",
-                        t.getTaskType(), boolToInt(t.isCompleted()), t.getDescription());
-                br.write(details);
+                br.write(getTaskDetailToPrint(t));
             }
 
             br.close();
             fr.close();
         } catch (IOException e) {
-            //e.printStackTrace();
             throw new DukeException("cannot write to file");
         }
+    }
+
+    private String getTaskDetailToPrint(Task t) {
+        return String.format("%s | %d | %s\r\n",
+                t.getTaskType(), boolToInt(t.isCompleted()), t.getDescription());
     }
 
     /**
@@ -79,37 +80,41 @@ public class Storage {
                     new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                //handle line
-                String[] sections = line.split(" \\| ");
-                TaskType taskType = TaskType.convertToTaskType(sections[0]);
-                boolean completed = intStrToBool(sections[1]);
-                String description = sections[2];
-                String datetime = "";
-                String term = "";
-                if (taskType == TaskType.E) {       //actually can just store as you read in one... but ok
-                    term = " /at ";
-                } else if (taskType == TaskType.D) {
-                    term = " /by ";
-                }
-                if (sections.length > 3) {
-                    datetime = term + sections[3];
-                }
-
-                Task task = TaskList.createTask(taskType, description + datetime);
-                if (completed) {
-                    task.setCompleted();
-                }
+                Task task = parseLine(line);
                 tasks.add(task);
-
                 line = br.readLine();
             }
 
             br.close();
         } catch (IOException e) {
-            //e.printStackTrace();
             throw new DukeException("cannot read file");
         }
         return tasks;
+    }
+
+    private Task parseLine(String line) {
+        final int TASKTYPE = 0, COMPLETE = 1, DESCR = 2, DATE_IF_APPLICABLE = 3;
+
+        String[] sections = line.split(" \\| ");
+        TaskType taskType = TaskType.convertToTaskType(sections[TASKTYPE]);
+        boolean completed = intStrToBool(sections[COMPLETE]);
+        String description = sections[DESCR];
+        String datetime = "";
+        String term = "";
+        if (taskType == TaskType.E) {       //actually can just store as you read in one... but ok
+            term = " /at ";
+        } else if (taskType == TaskType.D) {
+            term = " /by ";
+        }
+        if (sections.length > DATE_IF_APPLICABLE) {
+            datetime = term + sections[DATE_IF_APPLICABLE];
+        }
+
+        Task task = TaskList.createTask(taskType, description + datetime);
+        if (completed) {
+            task.setCompleted();
+        }
+        return task;
     }
 
     private static int boolToInt(boolean b) {

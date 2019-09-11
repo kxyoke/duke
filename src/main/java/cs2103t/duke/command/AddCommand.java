@@ -36,10 +36,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task newTask = TaskList.createTask(this.taskType, this.fullDescription); //create task will throw errors
+        Task newTask = TaskList.createTask(this.taskType, this.fullDescription);
         tasks.addData(newTask);
 
-        //write to file
         storage.updateFile(tasks);
 
         return ui.dukeRespond("Got it. I've added this task:",

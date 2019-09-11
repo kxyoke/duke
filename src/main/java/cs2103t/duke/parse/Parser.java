@@ -54,7 +54,7 @@ public class Parser {
      */
     public String getInputEntireDescription() {
         Scanner sc = new Scanner(this.input);
-        sc.next(); //scan past taskType
+        sc.next();
         String description = "";
         if (sc.hasNext()) {
             description = sc.nextLine().trim();
@@ -77,25 +77,37 @@ public class Parser {
         Parser parser = new Parser(fullCommand);
         TaskType taskType = parser.getInputTaskType();
         String descr = parser.getInputEntireDescription();
+        Command cmd = getCommand(taskType, descr);
+
+        assert cmd != null : "Command is null for some reason after parsing.";
+        return cmd;
+    }
+
+    private static Command getCommand(TaskType t, String d) {
         Command cmd;
-        switch (taskType) {
+        switch (t) {
         case LIST:
             cmd = new ListCommand();
             break;
         case DELETE:
-            cmd = new DeleteCommand(descr);
+            cmd = new DeleteCommand(d);
             break;
         case DONE:
-            cmd = new DoneCommand(descr);
+            cmd = new DoneCommand(d);
             break;
         case EXIT:
             cmd = new ExitCommand();
             break;
         case FIND:
-            cmd = new FindCommand(descr);
+            cmd = new FindCommand(d);
             break;
-        default: //add or wrong
-            cmd = new AddCommand(taskType, descr);
+        case T: //fallthrough
+        case D: //fallthrough
+        case E: //fallthrough
+            cmd = new AddCommand(t, d);
+            break;
+        default:
+            cmd = null;
         }
 
         return cmd;
@@ -108,18 +120,13 @@ public class Parser {
      * @throws DukeException if input is not in "dd/MM/yyyy HHmm" format.
      */
     public static Date convertToDate(String input) throws DukeException {
-        Date date = null;
+        Date date;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(input);
             return date;
         } catch (ParseException e) {
             throw new DukeException("Date is wrong format, try again");
         }
-        /*
-         finally {
-            return date;
-        }
-         */
     }
 
     /**

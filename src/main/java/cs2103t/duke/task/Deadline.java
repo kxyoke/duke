@@ -32,20 +32,23 @@ public class Deadline extends Task {
     }
 
     private void setupDetails(String input) throws IncorrectTaskFormatException {
-        String[] tmp = input.split("\\s+/by\\s+");
+        final int DESCR = 0, DATE_INDEX = 1, NUM_MUST_HAVE_SECTIONS = 2;
+        String[] sections = input.split("\\s+/by\\s+");
         //inputs should only have <=1 '/' characters
-        this.description = tmp[0];
-
-        if (tmp.length < 2) {
+        if (sections.length < NUM_MUST_HAVE_SECTIONS) {
             throw new IncorrectTaskFormatException("by");
         }
 
+        this.description = sections[DESCR];
+
+
         String term = "by";
-        String date = tmp[1];
+        String date = sections[DATE_INDEX];
 
         if (date.equals("")) {
             throw new IncorrectTaskFormatException("by");
         }
+
         this.notesInBrackets = String.format("%s: %s", term, date);
 
         super.description = String.format("%s (%s)", this.description, this.notesInBrackets);

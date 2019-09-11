@@ -58,8 +58,6 @@ public class TaskList {
         int listIndex = 0;
         for (Task t : this.taskList) {
             listIndex++;
-            //int id = t.getId();
-            //ASSUMPTION: ok fine need to at least print new id, if i dont wanna change the init id
             taskStrings[listIndex] = String.format("%d.%s", listIndex, t.toString());
         }
         return ui.dukeRespond(taskStrings);
@@ -143,11 +141,14 @@ public class TaskList {
     public List<Task> findTasks(String wordToFind) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : this.taskList) {
-            //find in task.toString()
-            if (task.toString().contains(wordToFind)) {
+            if (containsKeyword(task, wordToFind)) {
                 foundTasks.add(task);
             }
         }
         return foundTasks;
+    }
+
+    private boolean containsKeyword(Task t, String kw) {
+        return t.toString().contains(kw);
     }
 }
