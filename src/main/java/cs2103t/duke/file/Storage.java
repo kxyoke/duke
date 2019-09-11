@@ -122,6 +122,7 @@ public class Storage {
     }
 
     private static boolean intStrToBool(String intStr) {
+        assert intStr.length() == 1 : "Neither '0' nor '1' was passed into intStrToBool";
         return intStr.equals("1");
     }
 }

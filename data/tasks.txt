@@ -1,0 +1,8 @@
+T | 0 | 2100 script
+T | 0 | chem revision + thermody cheatsheet
+T | 0 | ask xk bout shirts (if they are ordered yet or not)
+T | 0 | ask nathan bout procuring limbs quotation
+T | 0 | glutinitdisplaywindow ( glut_rgbglut_double) or gl_doubl gl_rgb or gl_rgb glut_double?
+T | 0 | why must glloadidentity before glortho2d
+T | 0 | go read ab3
+D | 1 | yue ling ge | 7/9/19 1700

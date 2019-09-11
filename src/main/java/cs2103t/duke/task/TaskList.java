@@ -82,9 +82,10 @@ public class TaskList {
             throw new InvalidIdException("" + id);
         }
 
-
         Task task = this.taskList.get(id - 1);
         task.setCompleted();
+
+        assert task.isCompleted() : "Done does not mark properly as completed...?";
         return task;
     }
 
@@ -101,6 +102,7 @@ public class TaskList {
         }
 
         Task task = this.taskList.remove(id - 1);
+        assert task != null : "Deleted empty task?";
         return task;
     }
 
@@ -130,6 +132,7 @@ public class TaskList {
         default:
             throw new InvalidKeywordException("wrong keyword");
         }
+        assert t != null;
         return t;
     }
 

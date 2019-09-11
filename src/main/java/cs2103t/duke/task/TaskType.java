@@ -58,6 +58,7 @@ public enum TaskType {
             type = null;
             break;
         }
+        assert type != null : "TaskType should not be null";
         return type;
     }
 }

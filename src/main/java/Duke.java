@@ -59,11 +59,10 @@ public class Duke {
         }
     }
 
-
     /**
-     * Gets response from Duke when given a command.
-     * @param fullCommand the command.
-     * @return response to the command.
+     * Gets response from duke logic given a command.
+     * @param fullCommand the entire command given to duke.
+     * @return the response by duke.
      */
     public String getResponse(String fullCommand) {
         String res;
@@ -75,6 +74,7 @@ public class Duke {
         }
 
         assert res != null : "getResponse cannot work properly";
+
         return res;
     }
 

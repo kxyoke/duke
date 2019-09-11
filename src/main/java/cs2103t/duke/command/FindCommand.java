@@ -8,7 +8,7 @@ import cs2103t.duke.ui.Ui;
 import java.util.List;
 
 /**
- * Represents a find command.
+ * Represents a find command. Searches for occurrence of a given phrase in the description of task.
  */
 public class FindCommand extends Command {
     /** Keyword to find in task strings. */
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructs a find command.
-     * @param keyword the keyword/phrase to find in task strings.
+     * @param keyword phrase to find in task descriptions.
      */
     public FindCommand(String keyword) {
         this.wordToFind = keyword;
