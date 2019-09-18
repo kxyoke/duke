@@ -77,7 +77,7 @@ public class DeleteNotesCommand extends Command {
         Task t = tasks.retrieveTask(id);
         int noteid = t.getNoteId();
         t.deleteNotes();
-        notes.deleteNote(noteid - 1);
+        notes.deleteNote(noteid);
 
         return String.format("Got it. Deleted note for task %d", id);
     }

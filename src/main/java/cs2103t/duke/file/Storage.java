@@ -72,6 +72,7 @@ public class Storage {
     private String getTaskDetailToPrint(Task t) {
         String s = String.format("%s | %d | %d | %s\r\n",
                 t.getTaskType(), boolToInt(t.isCompleted()), t.getNoteId(), t.getDescription());
+        System.out.println(s);
         return s;
     }
 

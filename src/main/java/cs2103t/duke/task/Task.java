@@ -134,7 +134,7 @@ public abstract class Task {
 
     private String getNotesString() {
         if (hasNotes) {
-            return String.format("\n  |Notes:|\n  %s", this.note);
+            return String.format("\n|Notes:|\n  %s", this.note);
         } else {
             return "";
         }

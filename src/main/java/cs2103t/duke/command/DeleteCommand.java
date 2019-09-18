@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
 
         if (task.hasNotes()) {
             int noteId = task.getNoteId();
-            noteList.deleteNote(noteId - 1);
+            noteList.deleteNote(noteId);
             //tasks.updateNoteIdForEveryone(noteId);
         }
 

@@ -102,7 +102,7 @@ public class NoteList {
         while (it.hasNext() && id > it.next()) {
             numDeletedIdsLessThanId++;
         }
-
+        System.out.println(id - numDeletedIdsLessThanId);
         return id - numDeletedIdsLessThanId;
     }
 
